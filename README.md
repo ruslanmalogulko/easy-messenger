@@ -16,5 +16,5 @@ docker container run -it -p 3000:3000 -p 35729:35729 -v $(pwd):/app react:app
 ### Heroku
 
 You can find already running application here:
-https://easy-messenger.herokuapp.com[https://easy-messenger.herokuapp.com]
+https://easy-messenger.herokuapp.com
 
