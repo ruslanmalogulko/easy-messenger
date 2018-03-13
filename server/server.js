@@ -7,6 +7,7 @@ var path = require('path');
 var isInputProgress = false;
 var activeUsers = {};
 var activeSockets = {};
+var port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../build')));
 
@@ -49,7 +50,7 @@ io.on('connection', function(socket){
   socket.on('input indicator start', function(nick) {
     socket.broadcast.emit('input indicator start', nick);
     clearTimeout(isInputProgress);
-    isInputProgress = setTimeout(() => socket.broadcast.emit('input indicator stop'), 3000);
+    isInputProgress = setTimeout(() => socket.broadcast.emit('input indicator stop'), port);
   });
 
   socket.on('nick change', function(nick) {
@@ -58,6 +59,6 @@ io.on('connection', function(socket){
   })
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(port, function(){
+  console.log('listening on *:port');
 });
