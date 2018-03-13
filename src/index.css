@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+body { 
+    font: 13px Helvetica, Arial; 
+}
+form { 
+    padding: 3px; 
+    width: 100%; 
+}
+#messages { list-style-type: none; margin: 20px 0 0; padding: 0; max-height: 40vh; overflow: auto; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+
+.user-chip {
+    margin: 0 5px;
+}
