@@ -6,10 +6,11 @@ import { Message, Delete } from 'material-ui-icons';
 import './App.css';
 
 const TYPES = {
-  message: 'chat message',
-  indicationStart: 'input indicator start',
-  indicationStop: 'input indicator stop',
-  nickChange: 'nick change'
+    message: 'chat message',
+    indicationStart: 'input indicator start',
+    indicationStop: 'input indicator stop',
+    nickChange: 'nick change',
+    sendMessages: 'send messages'
 }
 
 class App extends Component {
@@ -65,23 +66,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.socket.on(TYPES.message, (message) => {
-      let newMessages = this.state.messages;
-      newMessages.push(`${message.nick}: ${message.message}`);
-      this.setState({ messages: newMessages });
-    });
+      this.socket.on(TYPES.message, (message) => {
+          let newMessages = this.state.messages;
+          newMessages.push(`${message.nick}: ${message.message}`);
+          this.setState({ messages: newMessages });
+      });
 
-    this.socket.on(TYPES.indicationStart, (nick) => {
-      this.setState({progress: true, progressBy: nick});
-    });
+      this.socket.on(TYPES.indicationStart, (nick) => {
+          this.setState({progress: true, progressBy: nick});
+      });
 
-    this.socket.on(TYPES.indicationStop, () => {
-      this.setState({progress: false, progressBy: ''});
-    });
+      this.socket.on(TYPES.indicationStop, () => {
+          this.setState({progress: false, progressBy: ''});
+      });
 
-    this.socket.on(TYPES.nickChange, (activeUsers) => {
-        this.setState({ activeUsers });
-    });
+      this.socket.on(TYPES.nickChange, (activeUsers) => {
+          this.setState({ activeUsers });
+      });
+
+      this.socket.on(TYPES.sendMessages, (messages) => {
+          this.setState({ messages: messages.map(item => `${item.user}: ${item.message}`) });
+      })
   }
 
   render() {
